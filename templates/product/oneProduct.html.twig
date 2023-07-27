@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ oneProduct.name }}{% endblock %}
+
+{% block body %}
+
+
+ {% include "partials/_navbar.html.twig" %}
+
+ <div class="row">
+ <div class="col-md-5">
+ <img src="/uploads/{{ oneProduct.illustration }}" alt="{{ oneProduct.name }}" class="img-fluid">
+ </div>
+
+ <div class="col-md-7 my-auto">
+ <h1>{{ oneProduct.name }}</h1>
+ <p>{{ oneProduct.subtitle}}</p>
+ <span>{{ (oneProduct.price /100)|number_format(2) }} €</span>
+ <hr>
+ <p>{{ oneProduct.description }}</p>
+ <hr>
+ <a href="" class="btn btn-primary">Ajouter au panier</a>
+ </div>
+ </div>
+ 
+
+
+
+
+
+
+
+ 
+  
+
+    
+
+
+ {% include "partials/_footer.html.twig" %}
+
+{% endblock %}

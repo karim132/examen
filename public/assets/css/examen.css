@@ -1,9 +1,34 @@
+/* body{
+
+    position:relative;
+} */
+
+
+
 .footer{
     
     text-align: center;
-    position: fixed;
-    background-color: #dfeaff;
+    /* position: fixed; */
+    background-color: #B3C1F3;
     bottom: 0;
     width: 100%;
     padding-top: 25px; 
+    padding-bottom: 15px;
+    margin-top: 150px;
+    
+  
+}
+
+.product-container{
+
+    margin-bottom: 250px;
+}
+
+
+.header{
+    padding-bottom: 15px;
+    padding-top: 15px;
+    /* margin-bottom: 15px; */
+    background-color: #B3C1F3 ;
+    
 }
