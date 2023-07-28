@@ -37,12 +37,12 @@ class ProductController extends AbstractController
    
     }
 
-    // Route qui affiche une salle en particulier
+    // Route qui affiche un produit en particulier
     #[Route('/produits/{id}', name: 'app_oneProduct', methods: ['GET', 'POST'])]
     public function show($id, ProductRepository $oneProductRepository): Response
     {
         
-        // Affiche la salle demandée dans le template dédié
+        // Affiche le produit demandé dans le template dédié
         return $this->render('product/oneProduct.html.twig', [
             // Récupère la salle demandée par son id
             'oneProduct' => $oneProductRepository->findOneBy(
