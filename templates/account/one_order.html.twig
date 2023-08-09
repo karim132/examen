@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block title %}Ma commande{% endblock %}
+
+{% block body %}
+
+ {% include "partials/_navbar.html.twig" %}
+
+
+<h1 class="mt-3">Ma commande {{ order.reference }}</h1>
+
+
+<hr>
+{# {{ dump(order) }} #}
+
+Commande passée le: {{ order.createdAt|date('d/m/Y') }} <br>
+Référence de ma commande : {{ order.reference }}    <br>
+Transporteur choisi : {{ order.carrierName }}
+<hr>
+<strong>Détails:</strong><br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Produit</th>
+      <th scope="col">Quantité</th>
+      <th scope="col">Prix unitaire</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for product in order.orderDetails %}
+
+  {# {{ dump(product) }} #}
+    
+  
+    <tr>
+      <td>{{ product.product }}</td>
+      <td> x {{ product.quantity }} </td>
+      <td>{{ (product.price /100)|number_format(2,',','.')}} €</td>
+      <td>{{ (product.total /100)|number_format(2,',','.')}} €</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="text-right">
+<strong>Sous-total : </strong>{{ (order.total /100)|number_format(2,',','.') }} €<br/>
+<strong>Livraison : </strong>{{ (order.carrierPrice /100)|number_format(2,',','.') }} € <br/>
+<strong>Total : </strong>{{ (order.total /100 +  (order.carrierPrice /100))|number_format(2,',','.') }} €
+</div>
+
+
+<a href={{ path('app_account_order')}}>Retour</a>
+
+{% include "partials/_footer.html.twig" %}
+
+{% endblock %}

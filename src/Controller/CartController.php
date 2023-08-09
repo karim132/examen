@@ -1,22 +1,24 @@
 <?php
 
  namespace App\Controller;
- use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use App\Classe\Cart;
 
-// use App\Classe\Cart;
+
+//1ère méthode
 
 // use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-// use Symfony\Component\HttpFoundation\Request;
-// use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\HttpFoundation\Session\SessionInterface;
-// use Symfony\Component\Routing\Annotation\Route;
 
-// class CartController extends AbstractController
-// {
+
+ class CartController extends AbstractController
+ {
 //     #[Route("/panier", name: 'app_cart')]
 //     public function index(Request $request,SessionInterface $sessionInterface) : Response
 //     {
@@ -42,110 +44,158 @@ use App\Repository\ProductRepository;
     // }
 // }
 
-#[Route("/cart", name: 'cart_')]
-Class CartController extends AbstractController
+// 2ème méthode
 
-{
-    #[Route("/", name: 'index')]
-   public function index( SessionInterface $session,ProductRepository $productsRepository)
-   {
-       $panier =$session->get('panier',[]);
+// #[Route("/cart", name: 'cart_')]
+// Class CartController extends AbstractController
 
-       //on initialise des variables
-       $data = [];
-       $total= 0;
-    //    $session->set('panier',[]);
+// {
+//    #[Route("/", name: 'index')]
+//    public function index( SessionInterface $session,ProductRepository $productsRepository)
+//    {
+//        $panier =$session->get('panier',[]);
 
-       foreach($panier as $id => $quantity){
-        $product= $productsRepository->find($id);
+//        //on initialise des variables
+//        $data = [];
+//        $total= 0;
+//     //    $session->set('panier',[]);
 
-        $data[]= [
-            'product'=> $product,
-            'quantity'=> $quantity
-        ];
-        $total += $product->getPrice() * $quantity;
+//        foreach($panier as $id => $quantity){
+//         $product= $productsRepository->find($id);
 
-       }
-    return $this->render('cart/cart.html.twig', compact('data','total'));
-   }
+//         $data[]= [
+//             'product'=> $product,
+//             'quantity'=> $quantity
+//         ];
+//         $total += $product->getPrice() * $quantity;
 
-    #[Route("add/{id}", name: 'app_add')]
-   public function add(Product $product, SessionInterface $session)
-   {
-    //on récupère l'id du produit
-    $id= $product->getId();
+//        }
+//     return $this->render('cart/cart.html.twig', compact('data','total'));
+//    }
 
-    //on récupère le panier existant
-    $panier= $session->get('panier',[]);
+//     #[Route("add/{id}", name: 'app_add')]
+//    public function add(Product $product, SessionInterface $session)
+//    {
+//     //on récupère l'id du produit
+//     $id= $product->getId();
+
+//     //on récupère le panier existant
+//     $panier= $session->get('panier',[]);
         
-     //on ajoute le produit dans le panier s'il n'y est pas encore
-     //sinon on incrémente sa quantité
+//      //on ajoute le produit dans le panier s'il n'y est pas encore
+//      //sinon on incrémente sa quantité
 
-        if(!empty($panier[$id])){
-            $panier[$id]++;
-        }else{
-            $panier[$id]=1;
-        }
+//         if(!empty($panier[$id])){
+//             $panier[$id]++;
+//         }else{
+//             $panier[$id]=1;
+//         }
         
-        $session->set('panier',$panier);
+//         $session->set('panier',$panier);
         
-        //on redirige vers la page du panier
-        return $this->redirectToRoute('cart_index');
-   }
+//         //on redirige vers la page du panier
+//         return $this->redirectToRoute('cart_index');
+//    }
 
-   #[Route("remove/{id}", name: 'app_remove')]
-   public function remove(Product $product, SessionInterface $session)
-   {
-    //on récupère l'id du produit
-    $id= $product->getId();
+//    #[Route("remove/{id}", name: 'app_remove')]
+//    public function remove(Product $product, SessionInterface $session)
+//    {
+//     //on récupère l'id du produit
+//     $id= $product->getId();
 
-    //on récupère le panier existant
-    $panier= $session->get('panier',[]);
+//     //on récupère le panier existant
+//     $panier= $session->get('panier',[]);
         
-     //on retire le produit du panier s'il n'y a qu'un exemplaire
-     //sinon on décrémente sa quantité
+//      //on retire le produit du panier s'il n'y a qu'un exemplaire
+//      //sinon on décrémente sa quantité
 
-        if(!empty($panier[$id])){
-            if($panier[$id] > 1){
-            $panier[$id]--;
-        }else{
-            unset($panier[$id]);
-        }
-    }
-        $session->set('panier',$panier);
+//         if(!empty($panier[$id])){
+//             if($panier[$id] > 1){
+//             $panier[$id]--;
+//         }else{
+//             unset($panier[$id]);
+//         }
+//     }
+//         $session->set('panier',$panier);
         
-        //on redirige vers la page du panier
-        return $this->redirectToRoute('cart_index');
-   }
+//         //on redirige vers la page du panier
+//         return $this->redirectToRoute('cart_index');
+//    }
 
-   #[Route("delete/{id}", name: 'app_delete')]
-   public function delete(Product $product, SessionInterface $session)
-   {
-    //on récupère l'id du produit
-    $id= $product->getId();
+//    #[Route("delete/{id}", name: 'app_delete')]
+//    public function delete(Product $product, SessionInterface $session)
+//    {
+//     //on récupère l'id du produit
+//     $id= $product->getId();
 
-    //on récupère le panier existant
-    $panier= $session->get('panier',[]);
+//     //on récupère le panier existant
+//     $panier= $session->get('panier',[]);
         
-     //on retire le produit du panier s'il n'y a qu'un exemplaire
-     //sinon on décrémente sa quantité
+//      //on retire le produit du panier s'il n'y a qu'un exemplaire
+//      //sinon on décrémente sa quantité
 
-        if(!empty($panier[$id])){
-            unset($panier[$id]);
-        }
+//         if(!empty($panier[$id])){
+//             unset($panier[$id]);
+//         }
     
-        $session->set('panier',$panier);
+//         $session->set('panier',$panier);
         
-        //on redirige vers la page du panier
-        return $this->redirectToRoute('cart_index');
-   }
+//         //on redirige vers la page du panier
+//         return $this->redirectToRoute('cart_index');
+//    }
 
-   #[Route("empty", name: 'app_empty')]
-   public function empty(SessionInterface $session)
-   {
-       $session->remove('panier');
+//    #[Route("empty", name: 'app_empty')]
+//    public function empty(SessionInterface $session)
+//    {
+//        $session->remove('panier');
 
-       return $this->redirectToRoute('cart_index');
-   }
+//        return $this->redirectToRoute('cart_index');
+//    }
+
+
+#[Route("/panier", name: 'cart_index')]
+public function index(Cart $cart) : Response{
+
+    $cart->getTotal();
+
+    return $this->render('cart/index.html.twig',[
+        'cart'=>$cart->getTotal()
+    ]);
+
+
+}
+
+#[Route("/panier/add/{id}", name: 'cart_add')]
+public function add(Cart $cart,$id) : Response{
+
+    $cart->add($id);
+
+    return $this->redirectToRoute('cart_index');
+}
+
+#[Route("/panier/remove/{id}", name: 'cart_remove')]
+public function remove(Cart $cart,$id) : Response{
+
+    $cart->remove($id);
+
+    return $this->redirectToRoute('cart_index');
+}
+
+
+#[Route("/panier/delete/{id}", name: 'cart_delete')]
+public function delete(Cart $cart,$id) : Response{
+
+    $cart->delete($id);
+
+    return $this->redirectToRoute('cart_index');
+}
+
+#[Route("/panier/empty", name: 'cart_empty')]
+public function empty(Cart $cart) : Response{
+
+    $cart->removeAll();
+
+    return $this->redirectToRoute('cart_index');
+}
 }
 

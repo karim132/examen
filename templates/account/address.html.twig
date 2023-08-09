@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block title %}Mes adresses{% endblock %}
+
+{% block body %}
+
+ {% include "partials/_navbar.html.twig" %}
+
+ <div>
+<a href={{path('app_address_add')}} class="btn btn-info btn-sm float-right mt-2">Ajouter une adresse</a>
+<h1>Mes adresses</h1>
+</div>
+
+<hr>
+{# {{ dump(app.user) }} #}
+
+{% if app.user.addresses|length ==0 %}
+<p class="text-center">
+Vous n' avez pas encore ajouté d'adresse dans votre compte client. Pour en ajouter une , veuillez <a href={{path('app_address_add')}}>cliquer ici</a>.
+</p>
+{% else %}
+
+<div class="row">
+{% for address in app.user.addresses %}
+<div class="col-md-4">
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{address.name}}</h5>
+    <p class="card-text">
+      {{address.adress}}<br>
+      {{address.postal}}-{{ address.city}}-{{ address.country}}
+      </p>
+    <a href={{ path('app_address_edit',{ 'id': address.id})}} class="btn btn-primary">Modifier</a>
+    <a href={{ path('app_address_delete',{ 'id': address.id})}} class="btn btn-danger">Supprimer</a>
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+{% endif %}
+
+<hr>
+
+<a href={{path('app_account')}}>Retour à mon compte<a><br>
+
+ {% include "partials/_footer.html.twig" %}
+
+{% endblock %}

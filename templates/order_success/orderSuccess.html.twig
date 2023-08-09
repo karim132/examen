@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de commande{% endblock %}
+
+{% block body %}
+
+{% include "partials/_navbar.html.twig" %}
+
+{# {{ dump(order) }} #}
+<div class="mt-3 my-auto">
+<h2>Confirmation de commande</h2>
+<p>Bonjour <strong>{{ order.user.firstname}} {{ order.user.lastname}}</strong> <br/>
+Nous vous remercions pour votre commande numero <strong>{{ order.reference }}</strong> <br/>
+Une confirmation vient de vous être envoyée par email à l'adresse <strong>{{ order.user.email }}</strong>
+<hr>
+
+Votre commande sera livrée par <strong>{{ order.carrierName }}</strong> à l'adresse suivante : <br/>
+{{ order.delivery|raw }}
+<hr>
+Pour suivre votre commande, rendez-vous dans votre <a href={{ path('app_account_order')}}>compte</a>
+
+
+</p>
+</div>
+ {% include "partials/_footer.html.twig" %}
+
+{% endblock %}

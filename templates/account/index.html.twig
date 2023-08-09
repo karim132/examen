@@ -5,14 +5,17 @@
 {% block body %}
 
  {% include "partials/_navbar.html.twig" %}
+
+
+
 <h1>Mon compte</h1>
 
 {# Bienvenue {{ app.user.firstname }} dans votre compte. #}
 {# {{ dump(app.user.firstname) }} #}
 <hr>
-<a href={{path('app_account_password')}}>Modifier mon mot de passe  <a><br>
--Ajouter mes adresses <br>
--Mes commandes <br>
+<a href={{path('app_account_password')}} class="btn btn-info">Modifier mon mot de passe<a><br>
+<a href={{path('app_address')}} class="btn btn-info mt-2">Gérer mes adresses<a><br>
+<a href={{path('app_account_order')}} class="btn btn-info mt-2">Mes commandes<a>
 <hr>
 
  {% include "partials/_footer.html.twig" %}

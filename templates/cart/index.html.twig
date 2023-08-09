@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+
+{% include "partials/_navbar.html.twig" %}
+       
+
+<main class="container">
+    <section class="row">
+       <div>
+         {% if cart|length == 0 %}
+
+        <h1 class="text-center mb-5 mt-5">Votre panier est vide</h1>
+                
+        {% else %}
+
+           <h1 class="mt-3">Panier</h1>
+           <table class="table">
+           <thead>
+           <tr>
+           <th>Image</th>
+           <th>Produit</th>
+           <th>Prix</th>
+           <th>Quantité</th>
+           <th>Total</th>
+           <th>Action</th>
+           </tr>
+           </thead>
+           <tbody>
+
+             {% set total = null %} 
+             {% for element in cart %}
+             {% set total = total + element.product.price * element.quantity  %}
+                <tr>
+                <td><img src="/uploads/{{ element.product.illustration }}"alt={{ element.product.name }} height="50px"></td>
+                <td>{{ element.product.name }}</td>
+                <td>{{ element.product.price /100}} €</td>
+                <td>{{ element.quantity }}</td>
+                <td>{{ element.quantity * element.product.price /100 }} €</td>
+                <td>
+                  <a href={{ path('cart_add',{ 'id': element.product.id})}} class="btn btn-success">+</a>
+                   <a href={{ path('cart_remove',{ 'id': element.product.id})}} class="btn btn-warning">-</a>
+                   <a href={{ path('cart_delete',{ 'id': element.product.id})}} class="btn btn-danger">Supprimer</a>
+                </td>
+                </tr>
+                {# {% else %}
+                <tr>
+                <td colspan="5">Votre panier est vide</td>
+                </tr> #}
+             {% endfor %}
+             
+           </tbody>
+           <tfoot>
+           <tr class="w-100">
+           
+              <td colspan="4">Total</td>
+              <td>{{ total /100}} €</td>
+              <td class="total-cart">
+                 {# <a href={{ path('cart_app_empty')}} class="btn btn-danger ">Vider le panier</a> #}
+                 <a href={{ path('app_order')}}  class="btn btn-success w-50">Valider mon panier</a><br>
+                 <a href={{ path('cart_empty')}} class="btn btn-danger w-50 mt-2">Vider le panier</a> 
+              </td>
+           </tr>
+           </tfoot>
+           </table>
+           {% endif %}
+           <div class="col-md-12 text-center">
+             <a href={{ path('app_product')}} class="btn btn-primary w-50 mt-2 ">Retour</a>
+       </div>
+       </div>
+    </section>
+</main>
+
+ {% include "partials/_footer.html.twig" %}
+
+ {% endblock %}

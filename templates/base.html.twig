@@ -7,11 +7,13 @@
         <link rel="stylesheet" href={{ asset('assets/css/carousel.css') }}>
         <link rel="stylesheet" href={{ asset('assets/css/examen.css') }}>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
 
-        {% block javascripts %}
-        {% endblock %}
+        {# {% block stylesheets %}
+        {% endblock %} #}
+        
+         {% block javascripts %}
+        <script src="https://js.stripe.com/v3/"></script>
+        {% endblock %} 
     </head>
     <body>
         {% block body %}
@@ -27,4 +29,7 @@
           <script src={{ asset('assets/js/bootstrap.min.js')}}></script>
           <script src={{ asset('assets/js/bootstrap.bundle.js')}}></script>
     </body>
+    
+    {% block script %}
+    {% endblock %}
 </html>

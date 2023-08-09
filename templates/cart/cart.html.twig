@@ -43,16 +43,20 @@
              {% endfor %}
            </tbody>
            <tfoot>
-           <tr>
-              <td colspan="3">Total</td>
+           <tr class="w-100">
+              <td colspan="4">Total</td>
               <td>{{ total /100}} €</td>
               <td class="total-cart">
-                 <a href={{ path('cart_app_empty')}} class="btn btn-danger ">Vider</a>
-                 <a href="" class="btn btn-success">Valider mon panier</a>
+                 <a href={{ path('app_order')}}  class="btn btn-success w-50">Valider mon panier</a><br>
+                 <a href={{ path('cart_app_empty')}} class="btn btn-danger w-50 mt-2">Vider le panier</a> 
               </td>
+              
            </tr>
            </tfoot>
            </table>
+
+        
+
        </div>
        {# <div class="text-right">
        </div> #}

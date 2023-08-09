@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation commande{% endblock %}
+
+{% block body %}
+
+{% include "partials/_navbar.html.twig" %}
+
+<h2>Choisissez vos préférences avant de passer votre commande</h2>
+
+<hr>
+
+
+
+<div class="row">
+<div class="col-md-6">
+<div class="form-check">
+{# <b>Choisir mon adresse de livraison</b><br> #}
+{% if app.user.addresses|length ==0 %}
+<p>
+ <a href={{path('app_address_add')}} class="btn btn-info">Ajouter votre adresse</a>.
+</p>
+{% endif %}
+
+{% set formHtml %}
+{{ form_start(form, {action:path('app_order_recap')}) }}
+
+{{ form_end(form) }}
+{% endset %}
+
+ {{ formHtml|replace({'[br]': '<br>'})|raw }}
+</div>
+{# <b>Choisir mon transporteur</b> #}
+</div>
+<div class="col-md-6">
+<div class=""></div>
+<b>Récapitulatif de ma commande</b><br>
+
+{# {{ dump(cart) }} #}
+
+{% for element in cart %}
+<div class="row">
+<div class="col-2"><img src="/uploads/{{ element.product.illustration }}"alt={{ element.product.name }} height="50px"></div>
+<div class="col-8 my-auto">{{ element.product.name }}<br/>
+<small>{{ element.product.subtitle }}</small>
+</div>
+<div class="col-2 my-auto">x {{ element.quantity }}</div>
+</div>
+
+
+    
+{% endfor %}
+</div>
+</div>
+
+
+
+{% include "partials/_footer.html.twig" %}
+
+{% endblock %}

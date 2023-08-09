@@ -5,6 +5,8 @@
 {% block body %}
 
  {% include "partials/_navbar.html.twig" %}
+
+ <div class="form-login">
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -30,6 +32,6 @@
         Sign in
     </button>
 </form>
-
+</div>
  {% include "partials/_footer.html.twig" %}
 {% endblock %}
