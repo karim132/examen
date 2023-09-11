@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
 class Order
@@ -35,14 +36,14 @@ class Order
     #[ORM\OneToMany(mappedBy: 'myOrder', targetEntity: OrderDetails::class, cascade:['remove'])]
     private Collection $orderDetails;
 
-    #[ORM\Column]
-    private ?bool $IsPaid = null;
-
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stripeSessionId = null;
+
+    #[ORM\Column]
+    private ?int $status = null;
 
     public function __construct()
     {
@@ -144,26 +145,13 @@ class Order
         return $this;
     }
 
-    public function isIsPaid(): ?bool
-    {
-        return $this->IsPaid;
-    }
-
-    public function setIsPaid(bool $IsPaid): static
-    {
-        $this->IsPaid = $IsPaid;
-
-        return $this;
-    }
-
     public function getTotal()
     {
-        $total = null;
-        foreach($this->getOrderDetails()->getValues()as $product){
+         $total = null;
+        foreach($this->getOrderDetails()->getValues() as $product){
             $total= $total + ($product->getPrice()) * $product->getQuantity();
         }
         return $total;
-        
     }
 
     public function getReference(): ?string
@@ -189,4 +177,17 @@ class Order
 
         return $this;
     }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
 }

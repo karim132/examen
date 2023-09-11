@@ -96,5 +96,8 @@ class OrderDetails
     public function __toString()
     {
         return $this->getProduct().' x '. $this->getQuantity();
+       
     }
+
+
 }

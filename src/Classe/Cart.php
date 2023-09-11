@@ -4,7 +4,6 @@ namespace App\Classe;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\Product;
 
@@ -40,6 +39,11 @@ use App\Entity\Product;
          $this->getSession()->set('cart', $cart);
     }
 
+    public function get()
+    {
+        return $this->getSession()->get('cart');
+    }
+
     public function remove($id)
        {
 
@@ -47,7 +51,7 @@ use App\Entity\Product;
         $this->getSession()->set('cart',$cart);
         
 
-    
+   
        
             
          //on retire le produit du panier s'il n'y a qu'un exemplaire
@@ -62,7 +66,6 @@ use App\Entity\Product;
         }
         $this->getSession()->set('cart', $cart);
             
-
        }
 
 

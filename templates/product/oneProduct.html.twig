@@ -7,6 +7,7 @@
 
  {% include "partials/_navbar.html.twig" %}
 
+<main class="one-product">
  <div class="row">
  <div class="col-md-5 mt-5">
  <img src="/uploads/{{ oneProduct.illustration }}" alt="{{ oneProduct.name }}" class="img-fluid">
@@ -21,11 +22,10 @@
  <hr>
 
  {# <a href={{ path('cart_app_add',{ 'id': oneProduct.id})}} class="btn btn-primary">Ajouter au panier</a> #}
- <a href={{ path('cart_add',{ 'id': oneProduct.id})}} class="btn btn-primary">Ajouter au panier</a>
+ <a href={{ path('cart_add',{ 'id': oneProduct.id})}} class="btn btn-warning">Ajouter au panier</a>
  </div>
  </div>
- 
-
+ </main>
 
 
 

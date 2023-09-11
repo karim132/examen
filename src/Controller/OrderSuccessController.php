@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
+use App\Classe\Mail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Order;
+
 
 class OrderSuccessController extends AbstractController
 {
@@ -32,11 +34,17 @@ class OrderSuccessController extends AbstractController
             return $this->redirectToRoute('/');
         }
 
-        if(!$order->isIsPaid()){
+        if(!$order->getStatus()){
            $cart->removeAll();
             
-        $order->setIsPaid(true);
+        $order->setStatus(true);
         $this->entityManager->flush();
+
+        
+        $mail = new Mail();
+        // $content ="Bienvenue ".$user->getFirstname()."<br/>Vous pouvez dès à présent visiter notre site";
+        $mail->send($order->getUser()->getEmail(),$order->getUser()->getFirstname(),subject:'Merci pour votre commande',
+        content:"Bonjour ".$order->getUser()->getFirstname()."<br/>Votre commande a bien été validée");
 
         }
 

@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\User;
+use App\Entity\Contact;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;

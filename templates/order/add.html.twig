@@ -6,70 +6,90 @@
 
 {% include "partials/_navbar.html.twig" %}
 
-<h2>Mon récapitulatif</h2>
-
-<p>Verifier vos informations avant de payer votre commande</p>
+<h2 class="text-center mt-3">Mon récapitulatif</h2>
 
 <hr>
 
-
-
-
 <div class="row">
-<div class="col-md-6">
-<div class="form-check">
+{# <div class="col-md-7">
+<div class="form-form">
 
  <b>Mon adresse de livraison</b><br>
  {{ delivery|raw}}
-<hr>
+<br/>
+<br/>
 
-<b>Mon transporteur</b>
+<b>Mon transporteur</b><br/>
 
 {{ carrier.name }}<br/>
 {{ carrier.description }}<br/>
 {{ (carrier.price /100)|number_format(2,',','.') }} €
-
-
 </div>
-</div>
-<div class="col-md-6">
-<div class="text-center"></div>
+</div> #}
+
+<div class="col-md-7">
+<div class="form-check-2">
+<div class="text-center">
 <b>Ma commande</b><br>
-
+</div>
 {% set total = null %} 
 {% for element in cart %}
- {% set total = total + element.product.price * element.quantity  %}
+{% set total = total + element.product.price * element.quantity  %}
 <div class="row">
-<div class="col-2"><img src="/uploads/{{ element.product.illustration }}"alt={{ element.product.name }} height="50px"></div>
-<div class="col-8 my-auto">{{ element.product.name}}<br/>
+<div class="col-2 mt-3"><img src="/uploads/{{ element.product.illustration }}"alt={{ element.product.name }} height="50px"></div>
+<div class="col-8 my-auto mt-2">{{ element.product.name}}<br/>
 <small>{{ element.product.subtitle }}</small><br/>
 <small> x{{ element.quantity }}</small>
 </div>
 <div class="col-2 my-auto">{{ element.quantity * element.product.price /100 }} €</div>
 </div>
 {% endfor %}
-<hr>
-<strong>Sous-total : </strong>{{ (total /100)|number_format(2,',','.') }} €<br/>
 
-{# {{ dump(carrier) }} #}
+ <br> 
+
+<div class="order-recap">
+<strong>Sous-total : </strong>{{ (total /100)|number_format(2,',','.') }} €<br/>
 <strong>Livraison : </strong>{{ (carrier.price /100)|number_format(2,',','.') }} € <br/>
 <strong>Total : </strong>{{ (total /100 +  (carrier.price /100))|number_format(2,',','.') }} €
-<hr>
-
-
+</div>
+<div class="col-md-12 text-center">
+<div class="payer">
+<div class="form-signin w-100 m-auto">
   <form method='POST' action={{path('app_stripe', {reference:reference})}}> 
-   <button class="btn btn-lg btn-primary" type="submit" 
-   > Payer {{ (total /100 +  carrier.price /100)|number_format(2,',','.') }} €</button> 
+   <button class="btn btn-success btn-block w-100" type="submit">
+    Payer {{ (total /100 +  carrier.price /100)|number_format(2,',','.') }} €</button> 
   </form>
+</div>
+</div>
+</div>
+</div>
+<br>
 
+{# <div class="col-md-12 text-center">
+<div class="payer">
+<div class="form-signin w-100 m-auto">
+  <form method='POST' action={{path('app_stripe', {reference:reference})}}> 
+   <button class="btn btn-lg btn-primary w-100" type="submit">
+    Payer {{ (total /100 +  carrier.price /100)|number_format(2,',','.') }} €</button> 
+  </form>
+</div>
+</div>
+</div> #}
+</div>
+<div class="col-md-5">
+<div class="form-form">
 
-  {# <a href={{ path('app_order_recap')}}  class="btn btn-success btn-block w-50" id="checkout-button"> Payer</a>  #}
- {# </form> 
-   <form method="post" action={{path('app_stripe', {reference:reference })}}> 
-   <a href="" class="btn btn-success btn-block w-50"> Payer</a> 
-  </form> #}
+ <b>Mon adresse de livraison</b><br>
+ {{ delivery|raw}}
+<br/>
+<br/>
 
+<b>Mon transporteur</b><br/>
 
+{{ carrier.name }}<br/>
+{{ carrier.description }}<br/>
+{{ (carrier.price /100)|number_format(2,',','.') }} €
+</div>
 </div>
 </div>
 

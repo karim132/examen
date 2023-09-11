@@ -24,9 +24,6 @@ class ChangePasswordType extends AbstractType
             ->add('old_password',PasswordType::class,[
                 'label'=> 'Mon mot de passe actuel',
                 'mapped'=>false,
-                'attr'=> [
-                    'placeholder'=>'Veuillez saisir votre mot de passe actuel'
-                ]
             ])
             ->add('new_password',RepeatedType::class,[
                 'type'=>PasswordType::class,
@@ -46,7 +43,10 @@ class ChangePasswordType extends AbstractType
                 'label'=> 'Mon nom'
             ])
             ->add('submit',SubmitType::class,[
-                'label'=> 'Mettre à jour'
+                'label'=> 'Mettre à jour',
+                'attr'=> [
+                    'class'=>'btn btn-primary btn-lg mt-3 w-100'
+                ]
             ])
         ;
         ;

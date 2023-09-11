@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous contacter{% endblock %}
+
+{% block body %}
+
+{% include "partials/_navbar.html.twig" %}
+
+{# <main class="form-signin w-80 m-auto mt-3"> #}
+
+ <iframe  class="w-80" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2618.153714728271!2d2.2280952343132197!3d48.98863213328082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6670543b66d39%3A0xcf72f3b4c1340450!2s33%20Rue%20de%20la%20Station%2C%2095130%20Franconville!5e0!3m2!1sfr!2sfr!4v1671790263507!5m2!1sfr!2sfr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
+{# <div class="text-center mt-3">
+<h2><strong>Un conseil, un renseignement ?</strong></h2>
+<h5>N'hésitez pas à nous contacter</h5>
+</div> #}
+
+<div class="row">
+<div class="col-md-6">
+{# <h2 class=" mt-3">Nous contacter</h2> #}
+<div class="form-contact">
+<h2 class=" mt-3">Contactez-nous</h2>
+{{ form(form)}}
+</div>
+</div>
+
+<div class="col-md-6">
+<div class=" mt-3">
+<h2>Vous avez des questions?</h2>
+<p class="mt-3"><strong>Service commercial :</strong></p>
+<p>Lundi à vendredi 9h/17h</p>
+<p>01 48 56 32 14</p>
+<p>service_commercial@hotmail.com</p>
+<p class="mt-3"><strong>Service litige : </strong></p>
+<p>Lundi à vendredi 9h/17h</p>
+<p>service_litige@hotmail.com</p>
+<p class="mt-3"><strong>Retrait commande </strong></p>
+<p>Uniquement sur rendez-vous</p>
+</div>
+</div>
+
+{# <iframe class="mt-3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2618.153714728271!2d2.2280952343132197!3d48.98863213328082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6670543b66d39%3A0xcf72f3b4c1340450!2s33%20Rue%20de%20la%20Station%2C%2095130%20Franconville!5e0!3m2!1sfr!2sfr!4v1671790263507!5m2!1sfr!2sfr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> #}
+{# </main> #}
+
+    {% include "partials/_footer.html.twig" %}
+
+
+
+
+{% endblock %}

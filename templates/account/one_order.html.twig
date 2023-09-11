@@ -14,8 +14,16 @@
 
 
 <hr>
-{# {{ dump(order) }} #}
 
+Statut de la commande :
+      {% if order.status == 1 %}
+      Paiement accepté
+      {% elseif order.status == 2 %}
+       Préparation en cours   
+      {% elseif order.status == 3 %}
+      Livraison en cours
+      {% endif %}
+      <br>
 Commande passée le: {{ order.createdAt|date('d/m/Y') }} <br>
 Référence de ma commande : {{ order.reference }}    <br>
 Transporteur choisi : {{ order.carrierName }}
@@ -53,9 +61,11 @@ Transporteur choisi : {{ order.carrierName }}
 <strong>Total : </strong>{{ (order.total /100 +  (order.carrierPrice /100))|number_format(2,',','.') }} €
 </div>
 
+<hr>
 
-<a href={{ path('app_account_order')}}>Retour</a>
-
+<div class="">
+<a class="btn btn-primary mt-2" href={{ path('app_account_order')}}>Retour</a>
+</div>
 {% include "partials/_footer.html.twig" %}
 
 {% endblock %}

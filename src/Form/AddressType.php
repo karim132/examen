@@ -17,7 +17,7 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('name',TextType::class,[
-                'label'=> 'nom',
+                'label'=> 'Nom de l\'adresse',
             ])
             ->add('firstname',TextType::class,[
                 'label'=> ' Votre nom',
@@ -47,7 +47,7 @@ class AddressType extends AbstractType
             ->add('submit',SubmitType::class,[
                 'label'=>'Ajouter mon adresse',
                 'attr'=>[
-                    'class' => 'btn-block btn-info mt-3'
+                    'class' => 'btn btn-primary btn-lg mt-3 w-100'
                 ]
             ])
         ;

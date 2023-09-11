@@ -37,12 +37,16 @@
                 <td><img src="/uploads/{{ element.product.illustration }}"alt={{ element.product.name }} height="50px"></td>
                 <td>{{ element.product.name }}</td>
                 <td>{{ element.product.price /100}} €</td>
-                <td>{{ element.quantity }}</td>
+                <td>
+                 {# <a href={{ path('cart_remove',{ 'id': element.product.id})}} ><img src="/uploads/minus-sign.png" height="10px"></a> #}
+                {{ element.quantity }}
+                    {# <a href={{ path('cart_add',{ 'id': element.product.id})}}><img src="/uploads/add.png" height="10px"></a> #}
+                </td>
                 <td>{{ element.quantity * element.product.price /100 }} €</td>
                 <td>
-                  <a href={{ path('cart_add',{ 'id': element.product.id})}} class="btn btn-success">+</a>
-                   <a href={{ path('cart_remove',{ 'id': element.product.id})}} class="btn btn-warning">-</a>
-                   <a href={{ path('cart_delete',{ 'id': element.product.id})}} class="btn btn-danger">Supprimer</a>
+                   <a href={{ path('cart_add',{ 'id': element.product.id})}}><img src="/uploads/add.png" alt="ajout produit" height="15px"></a> 
+                    <a href={{ path('cart_remove',{ 'id': element.product.id})}} ><img src="/uploads/minus-sign.png" alt="reduire produit" height="15px"></a> 
+                   <a href={{ path('cart_delete',{ 'id': element.product.id})}}><img src="/uploads/trash-can.png" alt="supression produit" height="20px"></a>
                 </td>
                 </tr>
                 {# {% else %}
@@ -59,15 +63,20 @@
               <td>{{ total /100}} €</td>
               <td class="total-cart">
                  {# <a href={{ path('cart_app_empty')}} class="btn btn-danger ">Vider le panier</a> #}
-                 <a href={{ path('app_order')}}  class="btn btn-success w-50">Valider mon panier</a><br>
-                 <a href={{ path('cart_empty')}} class="btn btn-danger w-50 mt-2">Vider le panier</a> 
+      
+                 <a href={{ path('cart_empty')}} class="btn-cart-empty">Vider<img src="/uploads/trash-can.png" alt="supression produit" height="20px"></a>
+                   {# <a href={{ path('app_order')}}  class="btn btn-success w-50 mt-5">Valider mon panier</a><br>  #}
               </td>
            </tr>
            </tfoot>
            </table>
-           {% endif %}
+           
            <div class="col-md-12 text-center">
-             <a href={{ path('app_product')}} class="btn btn-primary w-50 mt-2 ">Retour</a>
+             <a href={{ path('app_order')}}  class="btn btn-success w-50 mt-2">Valider mon panier</a><br> 
+           </div>
+           {% endif %}
+      <div class="col-md-12 text-center">
+             <a href={{ path('app_product')}} class="btn btn-warning w-50 mt-2 ">Retour</a>
        </div>
        </div>
     </section>

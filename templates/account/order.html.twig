@@ -26,6 +26,7 @@ Vous n' avez pas encore passé de commande sur notre site.
   <thead>
     <tr>
       <th scope="col">Référence</th>
+      <th scope="col">Statut</th>
       <th scope="col">Passée le</th>
       <th scope="col">Produits</th>
       <th scope="col">Total</th>
@@ -37,10 +38,21 @@ Vous n' avez pas encore passé de commande sur notre site.
 {# {{ dump(order) }}  #}
     <tr>
       <td>{{ order.reference }}</td>
+      <td>
+      {% if order.status == 1 %}
+      Paiement accepté
+      {% elseif order.status == 2 %}
+       Préparation en cours   
+      {% elseif order.status == 3 %}
+      Livraison en cours
+      {% endif %}
+      
+      
+      </td>
       <td>{{ order.createdAt|date('d/m/Y') }}</td>
       <td>{{ order.orderDetails|length}}</td>
       <td>{{ ((order.carrierPrice + order.total)/100)|number_format(2,',','.')}} €</td>
-      <td><a href={{ path('app_account_one_order',{ reference:orders[0].reference })}}>Voir ma commande</a></td>
+      <td ><a class="voir-ma-commande" href={{ path('app_account_one_order',{ reference:orders[0].reference })}}>Voir ma commande</a></td>
     </tr>
 {% endfor %}
   </tbody>

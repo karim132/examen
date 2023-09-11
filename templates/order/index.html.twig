@@ -6,21 +6,20 @@
 
 {% include "partials/_navbar.html.twig" %}
 
-<h2>Choisissez vos préférences avant de passer votre commande</h2>
+<h2 class="mt-3">Choisir mon mode de livraison</h2>
 
 <hr>
 
-
-
 <div class="row">
 <div class="col-md-6">
-<div class="form-check">
+{# <div class="form-check"> #}
 {# <b>Choisir mon adresse de livraison</b><br> #}
-{% if app.user.addresses|length ==0 %}
+{# {% if app.user.addresses|length ==0 %}
 <p>
- <a href={{path('app_address_add')}} class="btn btn-info">Ajouter votre adresse</a>.
+ <a href={{path('app_address_add')}} class="btn btn-success">Ajouter votre adresse</a>.
 </p>
-{% endif %}
+{% endif %} #}
+<div class="form-form">
 
 {% set formHtml %}
 {{ form_start(form, {action:path('app_order_recap')}) }}
@@ -29,31 +28,26 @@
 {% endset %}
 
  {{ formHtml|replace({'[br]': '<br>'})|raw }}
-</div>
-{# <b>Choisir mon transporteur</b> #}
+</div> 
+ 
 </div>
 <div class="col-md-6">
-<div class=""></div>
+<div class="form-check-2">
+<div class="text-center mt-2">
 <b>Récapitulatif de ma commande</b><br>
-
-{# {{ dump(cart) }} #}
-
+</div>
 {% for element in cart %}
 <div class="row">
-<div class="col-2"><img src="/uploads/{{ element.product.illustration }}"alt={{ element.product.name }} height="50px"></div>
-<div class="col-8 my-auto">{{ element.product.name }}<br/>
-<small>{{ element.product.subtitle }}</small>
+<div class="col-2 mt-4"><img src="/uploads/{{ element.product.illustration }}"alt={{ element.product.name }} height="50px"></div>
+<div class="col-8 my-auto mt-3">{{ element.product.name }}<br/>
+<small>{{ element.product.subtitle }}</small><br/>
+x {{ element.quantity }}
 </div>
-<div class="col-2 my-auto">x {{ element.quantity }}</div>
 </div>
-
-
-    
 {% endfor %}
 </div>
 </div>
-
-
+</div>
 
 {% include "partials/_footer.html.twig" %}
 

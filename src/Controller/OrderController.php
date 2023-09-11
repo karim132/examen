@@ -9,7 +9,6 @@ use App\Entity\OrderDetails;
 use App\Form\OrderType;
 use Stripe\Stripe;
 use Doctrine\ORM\EntityManagerInterface;
-use Stripe\Checkout\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,10 +28,10 @@ private $entityManager;
     #[Route('/commande', name: 'app_order')]
     public function index(Cart $cart): Response
     {
-    //    if(!$this->getUser()->getAddresses()->getValues());
-    //     {
-    //         return $this->redirectToRoute('app_address_add');
-    //     }
+       if(!$this->getUser()->getAddresses()->getValues())
+        {
+            return $this->redirectToRoute('app_address_add');
+        }
 
         $form = $this->createForm(OrderType::class, null, [
             'user'=> $this->getUser()
@@ -85,7 +84,7 @@ private $entityManager;
            $order->setCarrierName($carriers->getName());
            $order->setCarrierPrice($carriers->getPrice()); 
            $order->setDelivery($delivery_content);
-           $order->setIsPaid(0);
+           $order->setStatus(0);
             // dd($order);
 
            $this->entityManager->persist($order);

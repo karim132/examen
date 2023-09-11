@@ -44,7 +44,7 @@ class ProductController extends AbstractController
         
         // Affiche le produit demandé dans le template dédié
         return $this->render('product/oneProduct.html.twig', [
-            // Récupère la salle demandée par son id
+            // Récupère le produit demandé par son id
             'oneProduct' => $oneProductRepository->findOneBy(
                 ['id' => $id],
                     // dd($oneProduct)

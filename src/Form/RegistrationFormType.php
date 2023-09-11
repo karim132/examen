@@ -19,12 +19,13 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname',TextType::class,[
-                'label'=> 'Prénom'
-            ])
             ->add('lastname',TextType::class,[
                 'label'=> 'Nom'
             ])
+            ->add('firstname',TextType::class,[
+                'label'=> 'Prénom'
+            ])
+          
             ->add('email',EmailType::class,[
                 'label'=> 'Email'
             ])
@@ -44,7 +45,10 @@ class RegistrationFormType extends AbstractType
 
 
             ->add('submit',SubmitType::class,[
-                'label'=> 'S\'inscrire'
+                'label'=> 'S\'inscrire',
+                'attr'=>[
+                    'class'=>'btn btn-primary btn-lg mt-3 w-100'
+                ]
             ])
         ;
     }

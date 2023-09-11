@@ -7,13 +7,19 @@
 
  {% include "partials/_navbar.html.twig" %}
 
-<h1>Gérer mes adresses</h1>
+<h1 class="text-center mt-3">Ajout d'une adresse</h1>
+
+<main class="form-signin w-50 m-auto">
 
 {{ form(form) }}
 
 <hr>
 
-<a href={{path('app_account')}}>Retour à mon compte<a><br>
+
+<a class="btn btn-primary btn-lg w-100 mt-2" href={{path('app_account')}}>Retour à mon compte<a><br>
+</main>
+
+
 
  {% include "partials/_footer.html.twig" %}
 

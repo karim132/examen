@@ -3,18 +3,9 @@
  namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Product;
-use App\Repository\ProductRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Classe\Cart;
-
-
-//1ère méthode
-
-// use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
  class CartController extends AbstractController

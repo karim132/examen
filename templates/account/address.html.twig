@@ -8,12 +8,14 @@
 {% block body %}
 
  {% include "partials/_navbar.html.twig" %}
-
- <div>
-<a href={{path('app_address_add')}} class="btn btn-info btn-sm float-right mt-2">Ajouter une adresse</a>
+{# <div class="row">
+<div class="col-md-3 ">
+<a href={{path('app_address_add')}} class="btn btn-primary btn-sm mt-3">Ajouter une adresse</a><br>
+</div> #}
+<div class="text-center mt-3">
 <h1>Mes adresses</h1>
 </div>
-
+</div>
 <hr>
 {# {{ dump(app.user) }} #}
 
@@ -25,7 +27,7 @@ Vous n' avez pas encore ajouté d'adresse dans votre compte client. Pour en ajou
 
 <div class="row">
 {% for address in app.user.addresses %}
-<div class="col-md-4">
+<div class="col-md-4 mt-3">
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{address.name}}</h5>
@@ -45,7 +47,11 @@ Vous n' avez pas encore ajouté d'adresse dans votre compte client. Pour en ajou
 
 <hr>
 
-<a href={{path('app_account')}}>Retour à mon compte<a><br>
+<div class="col-md-12 text-center">
+<a href={{path('app_address_add')}} class="btn btn-primary btn-lg mt-3 w-50">Ajouter une adresse</a><br>
+<a href={{path('app_account')}} class="btn btn-primary btn-lg mt-3 w-50" >Retour à mon compte<a><br>
+</div>
+
 
  {% include "partials/_footer.html.twig" %}
 

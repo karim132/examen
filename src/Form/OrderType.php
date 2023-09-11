@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 class OrderType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -17,7 +18,7 @@ class OrderType extends AbstractType
         $user= $options['user'];
         $builder
             ->add('addresses',EntityType::class,[
-                'label'=>'Choisissez votre adresse de livraison',
+                'label'=>'Choisissez votre adresse',
                 'required'=> true,
                  'class'=>Address::class,
                  'choices'=>$user->getAddresses(),
@@ -25,7 +26,7 @@ class OrderType extends AbstractType
                  'expanded'=> true
             ])
             ->add('carriers',EntityType::class,[
-                'label'=>'Choisissez votre transporteur',
+                 'label'=>'Choisissez votre transporteur',
                 'required'=> true,
                  'class'=>Carrier::class,
                 //  'choices'=>$user->getAddresses(),
@@ -35,7 +36,7 @@ class OrderType extends AbstractType
             ->add('submit',SubmitType::class,[
                 'label'=> 'Valider ma commande',
                 'attr'=>[
-                    'class'=>'btn btn-success btn-block'
+                    'class'=>'btn btn-success btn-block w-100 mt-3'
                 ]
             ])
         ;

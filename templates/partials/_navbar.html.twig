@@ -1,7 +1,7 @@
  <header class="header">
  <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href={{path('app_home')}}>Le site du trek</a>
+    <a class="navbar-brand" href={{path('app_home')}}>Trekking</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,30 +12,46 @@
         </li> #}
         <li class="nav-item">
           <a class="nav-link" href={{path('app_product')}}>Nos produits</a>
-        </li>
+        {# </li>
           <li class="nav-item">
           <a class="nav-link" href='#'>Qui sommes-nous?</a>
-        </li>
+        </li> #}
         <li class="nav-item">
-          <a class="nav-link" href='#'>Contact</a>
+          <a class="nav-link" href={{path('app_contact')}}>Contact</a>
         </li>
 
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-       {% if app.user %} 
+      {% if app.user %} 
       {% if is_granted('ROLE_ADMIN') %} 
       <li class="nav-item">
           <a class="nav-link" href={{path('admin')}}>Administration</a>
         </li>
-      
       {% endif %}
+
+      	
+		
+<div class="dropdown">
+<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Mon compte</a> 
+          <ul class="dropdown-menu" class="dropdown">
+          <li><a class="dropdown-item" href={{path('app_account_order')}}>Mes commandes</a></li>
+				    <li><a class="dropdown-item" href={{path('app_account_password')}}>Modifier mon mot de passe</a></li>
+				    <li><a class="dropdown-item" href={{path('app_address')}}>Gérer mes adresses</a></li>
+          </ul>
+      </li>
+      </div>
+{#       
       <li class="nav-item">
           <a class="nav-link" href={{path('app_account')}}>Mon compte</a>
-        </li>
+
+        </li> #}
       <li class="nav-item">
           <a class="nav-link" href={{path('app_logout')}}>Déconnexion</a>
         </li>
-        
+          <a class="nav-link" href={{path('cart_index')}}>
+         <img src="/uploads/shopping-cart.png" alt="panier" height="20px"> 
+         </a> 
 
       {% else %}
         <li class="nav-item">
@@ -44,7 +60,9 @@
                 <li class="nav-item">
           <a class="nav-link" href={{path('app_registration')}}>Inscription</a>
         </li>
+
         {% endif %}
+
       </ul>
     </div>
   </div>

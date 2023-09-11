@@ -33,7 +33,7 @@
                 <td>
                    <a href={{ path('cart_app_add',{ 'id': element.product.id})}} class="btn btn-success">+</a>
                    <a href={{ path('cart_app_remove',{ 'id': element.product.id})}} class="btn btn-warning">-</a>
-                   <a href={{ path('cart_app_delete',{ 'id': element.product.id})}} class="btn btn-danger">Supprimer</a>
+                   <a href={{ path('cart_app_delete',{ 'id': element.product.id})}} class="btn btn-danger"><img src="/uploads/trash-can.png" height="50px"></a>
                 </td>
                 </tr>
                 {% else %}

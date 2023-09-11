@@ -5,7 +5,7 @@
 {% block body %}
 
  {% include "partials/_navbar.html.twig" %}
-
+<main class="form-signin w-50 m-auto">
  <div class="form-login">
 <form method="post">
     {% if error %}
@@ -18,7 +18,7 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+    <h1 class="h3 mb-3 font-weight-normal text-center mt-4">Connexion</h1>
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <label for="inputPassword">Mot de passe</label>
@@ -28,10 +28,14 @@
            value="{{ csrf_token('authenticate') }}"
     >
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+    <button class="btn btn-lg btn-primary mt-3 w-100" type="submit">
+        Se connecter
     </button>
+
 </form>
+    <a class="btn-register" href={{ path('app_registration') }}>Créer un compte</a> 
+ {# <a class="text-center mt-3" href={{ path('app_registration') }}> ou créer un compte</a>  #}
 </div>
+</main>
  {% include "partials/_footer.html.twig" %}
 {% endblock %}
