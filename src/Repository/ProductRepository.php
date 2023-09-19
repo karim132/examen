@@ -6,6 +6,8 @@ use App\Classe\Search;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Product>
@@ -17,7 +19,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+
+    public function __construct(ManagerRegistry $registry,private PaginatorInterface $paginator)
     {
         parent::__construct($registry, Product::class);
     }
@@ -29,42 +32,48 @@ class ProductRepository extends ServiceEntityRepository
 public function findWithSearch(Search $search)
 
 {
-    $query=$this
+    $quer=$this
     ->createQueryBuilder('p')
     ->select('c','p')
     ->join('p.category','c');
 
     if(!empty($search->categories)){
-        $query=$query
+        $quer=$quer
         ->andwhere('c.id IN (:categories)')
         ->setParameter('categories',$search->categories);
     }
     if(!empty($search->string)){
-        $query=$query
+        $quer=$quer
         ->andWhere('p.name LIKE :string')
         ->setParameter('string',"%{$search->string}%");
 
     }
 
-    return $query->getQuery()->getResult();
+    return $quer->getQuery()->getResult();
 }
 
 
 
-//    /**
-//     * @return Product[] Returns an array of Product objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+
+   /**
+    * @param int $page
+    * @return PaginationInterface
+    */
+   public function findAllWithData(int $page): PaginationInterface
+   {
+       $data=  $this->createQueryBuilder('p')
+        //    ->andWhere('p.exampleField = :val')
+        //    ->setParameter('val', $value)
+           ->orderBy('p.id', 'ASC')
+        //    ->setMaxResults(10)
+           ->getQuery()
+           ->getResult()
+       ;
+
+       $pagination= $this->paginator->paginate($data, $page,9);
+
+       return $pagination;
+   }
 
 //    public function findOneBySomeField($value): ?Product
 //    {

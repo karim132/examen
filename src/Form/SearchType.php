@@ -37,6 +37,7 @@ class SearchType extends AbstractType
                     'class' => 'btn btn-primary btn-lg w-100 mt-3'
                 ]
              ])
+            
              ;
              }
     public function configureOptions(OptionsResolver $resolver): void
