@@ -51,14 +51,10 @@ private $entityManager;
         $form = $this->createForm(OrderType::class, null, [
             'user'=> $this->getUser()
         ]);
-
-
          $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
 
-
-            //    dd($form->getData());
            //enregistrer ma commande Order()
            $date = new \DateTime();
            $carriers =$form->get('carriers')->getData();
@@ -69,12 +65,10 @@ private $entityManager;
            if($delivery->getCompany()){
            $delivery_content .= '<br/>'.$delivery->getCompany();
            }
-
            $delivery_content .= '<br/>'.$delivery->getAdress();
            $delivery_content .= '<br/>'.$delivery->getPostal().' '.$delivery->getCity();
            $delivery_content .= '<br/>'.$delivery->getCountry();
            
-
            $order = new Order();
            $reference = $date->format('dmY').'-'.uniqid();
            $order->setUser($this->getUser());
@@ -85,12 +79,10 @@ private $entityManager;
            $order->setCarrierPrice($carriers->getPrice()); 
            $order->setDelivery($delivery_content);
            $order->setStatus(0);
-            // dd($order);
 
            $this->entityManager->persist($order);
 
-          
-
+          // enregistrer mes produits
            foreach($cart->getTotal() as $product){
            $orderDetails = new OrderDetails;
            $orderDetails->setMyOrder($order);
@@ -99,26 +91,9 @@ private $entityManager;
            $orderDetails->setPrice($product['product']->getPrice());
            $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
            $this->entityManager->persist($orderDetails);
-
-
-
-           
-            // dd($product);
            }
-            //  dd($products_for_stripe);
-
-         $this->entityManager->flush();
-
-          
-
-
-        //    dump($checkout_session->id);
-        //    dd($checkout_session);
-
-           // enregistrer mes produits
+           $this->entityManager->flush();
            return $this->render('order/add.html.twig', [
-            // 'form' => $form->createView(),
-        //  'stripe_key' => $_ENV["STRIPE_KEY"],
             'cart'=> $cart->getTotal(),
             'carrier'=> $carriers,
             'delivery'=> $delivery_content,

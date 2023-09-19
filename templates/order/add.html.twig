@@ -11,22 +11,6 @@
 <hr>
 
 <div class="row">
-{# <div class="col-md-7">
-<div class="form-form">
-
- <b>Mon adresse de livraison</b><br>
- {{ delivery|raw}}
-<br/>
-<br/>
-
-<b>Mon transporteur</b><br/>
-
-{{ carrier.name }}<br/>
-{{ carrier.description }}<br/>
-{{ (carrier.price /100)|number_format(2,',','.') }} €
-</div>
-</div> #}
-
 <div class="col-md-7">
 <div class="form-check-2">
 <div class="text-center">
@@ -44,9 +28,7 @@
 <div class="col-2 my-auto">{{ element.quantity * element.product.price /100 }} €</div>
 </div>
 {% endfor %}
-
  <br> 
-
 <div class="order-recap">
 <strong>Sous-total : </strong>{{ (total /100)|number_format(2,',','.') }} €<br/>
 <strong>Livraison : </strong>{{ (carrier.price /100)|number_format(2,',','.') }} € <br/>
@@ -64,17 +46,6 @@
 </div>
 </div>
 <br>
-
-{# <div class="col-md-12 text-center">
-<div class="payer">
-<div class="form-signin w-100 m-auto">
-  <form method='POST' action={{path('app_stripe', {reference:reference})}}> 
-   <button class="btn btn-lg btn-primary w-100" type="submit">
-    Payer {{ (total /100 +  carrier.price /100)|number_format(2,',','.') }} €</button> 
-  </form>
-</div>
-</div>
-</div> #}
 </div>
 <div class="col-md-5">
 <div class="form-form">
@@ -96,62 +67,4 @@
 {% include "partials/_footer.html.twig" %}
 
 {% endblock %}
-
-
-{% block script %}
-
-{# <script type="text\javascript">
-var stripe = Stripe('pk_test_51MyWHoKxjzuU1nktwmLnWgwuUBpyEBji779FodwYt14mDgeMce0Iz09WTuvHf3kwNymOHDlWntSPyCEsWrz0Wz3W00kb0eRone');
-var checkoutButton = document.getElementById("checkout-button");
-checkoutButton.addEventListener("click" , function(){
-  fetch("/order/create-session/",{
-    method:"POST",
-  })
-  .then(function(response){
-    return response.json(),
-  })
-  .then(function(session){
-    return stripe.redirectToCheckout({ sessionId: session.id}),
-})
-  .then(function(result){
-    if(result.error) {
-      alert(result.error.message);
-    }
-  })
-  .catch(function(error){
-    console.error("Error:",error);
-  });
-});
-
-
-</script> #}
-
-
- {# <script src="https://js.stripe.com/v3/" ></script>
-    <script>
-        var stripe = Stripe("{{stripe_key}}");
-        var elements = stripe.elements();
-        var cardElement = elements.create('card');
-        cardElement.mount('#card-element');
-     
-        function createToken() {
-            document.getElementById("pay-btn").disabled = true;
-            stripe.createToken(cardElement).then(function(result) {
-     
-                     
-                if(typeof result.error != 'undefined') {
-                    document.getElementById("pay-btn").disabled = false;
-                    alert(result.error.message);
-                }
-     
-                // creating token success
-                if(typeof result.token != 'undefined') {
-                    document.getElementById("stripe-token-id").value = result.token.id;
-                    document.getElementById('checkout-form').submit();
-                }
-            });
-        }
-    </script> #}
-
-{% endblock %} 
 

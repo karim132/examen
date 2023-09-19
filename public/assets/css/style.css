@@ -24,6 +24,11 @@ body{
     color : white;
 }
 
+/* .header nav p{
+    background-color: #b6bba4;
+    color :  white;
+} */
+
 .product-container{
 
     margin-bottom: 250px;
@@ -33,7 +38,6 @@ body{
 .header{
     padding-bottom: 15px;
     padding-top: 15px;
-  
     background-color: #3157d6 ;
    
     
@@ -156,17 +160,11 @@ section {
 
     padding-left: 10%;
     padding-right: 10%;
-}
-
-
+} 
 
 .dropdown{
     color:  #3157d6; 
 }
-
-
-
-
 
 .product{
   width: 95%;
@@ -177,6 +175,37 @@ section {
     width: 95%;
     margin-left: 2%;
   }
+
+  .image{
+
+    width: 200px;
+    height: 250px;
+  }
+
+  .one-image{
+
+    width: 400px;
+    height: 800px;
+  }
+
+
+
+  /*RESPONSIVE*/
+@media screen and (max-width:420px){
+  
+section{
+      width: 100%;
+    }
+
+      .gauche{
+        padding-right: 10%;
+    }
+
+}
+
+
+
+
 
 
 

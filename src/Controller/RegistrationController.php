@@ -14,6 +14,8 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Security\LoginFormAuthenticator;
 
+
+
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_registration')]

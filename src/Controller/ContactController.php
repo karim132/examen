@@ -32,15 +32,17 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
 
+            if($this->getUser()){
+
               $data = $form->getData();
             //   dd($data);
-
+            
              $content = $data['content'];
              $email = $data['email'];
              $firstname = $data['firstname'];
              $lastname = $data['lastname'];
            
-
+            
            
             $body = [
              'Messages' => [
@@ -57,25 +59,15 @@ class ContactController extends AbstractController
                 ],
                 'Subject' => 'demande de contact',
                 'HtmlPart' => "$content,<br>$lastname $firstname,<br>$email  "
+            
             ]
         ]
     ];
+
     $response = $mj->post(Resources::$Email, ['body' => $body]);
     $response->success();
 
-
-            // $email = (new Email())
-            // ->from($address)
-            // ->to('karimidir5@gmail.com')
-            // ->subject('Contact')
-            // ->text($content);
-
-            // $mailer->send($email);
-            
-
-        // $entityManager->persist($form);
-        // $entityManager->flush();
-
+            }
         }
        
         return $this->render('contact/index.html.twig', [

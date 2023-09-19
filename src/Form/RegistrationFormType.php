@@ -38,12 +38,6 @@ class RegistrationFormType extends AbstractType
                 'second_options'=>['label'=>'Confirmer mot de passe']
             ])
 
-            // ->add('password_confirm',PasswordType::class,[
-            //     'label'=> 'Confirmer mot de passe',
-            //     'mapped' => false,
-            // ])
-
-
             ->add('submit',SubmitType::class,[
                 'label'=> 'S\'inscrire',
                 'attr'=>[
