@@ -9,11 +9,11 @@
 
 <main class="one-product">
  <div class="row">
- <div class="col-md-5 mt-5">
- <img src="/uploads/{{ oneProduct.illustration }}" alt="{{ oneProduct.name }}" style="width:350px;height:450px"  class="img-fluid">
+ <div class="col-md-3 mt-5">
+ <img src="/uploads/{{ oneProduct.illustration }}" alt="{{ oneProduct.name }}" style="width:400px;height:500px"  class="img-fluid rounded">
  </div>
 
- <div class="col-md-7 my-auto">
+ <div class="col-md-9 my-auto">
  <h1>{{ oneProduct.name }}</h1>
  <p>{{ oneProduct.subtitle}}</p>
  <span>{{ (oneProduct.price /100)|number_format(2) }} €</span>
