@@ -26,7 +26,10 @@
 <div class="product-item text-center mt-5">
 <div class="card card-bg rounded-4">
 <div class="card-body">
-<a href={{ path('app_oneProduct', { id: product.id }) }} </a> <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}" class="img-fluid"></a>
+<a href={{ path('app_oneProduct', { id: product.id }) }} 
+</a> <img src="/uploads/{{ product.illustration }}" 
+ alt="{{ product.name }}" style="width:300px;height:250px" 
+ class="img-fluid"></a>
 <h4>{{ product.name }}</h4>
 <span>{{ product.subtitle }}</span><br/>
 <span>{{ (product.price /100)|number_format(2) }} €</span>
