@@ -19,34 +19,36 @@ class OrderSuccessController extends AbstractController
         $this->entityManager=$entityManager;
     }
 
-    #[Route('/commande/merci/{stripeSessionId}', name: 'app_order_success')]
+    #[Route('/commande/success/{stripeSessionId}', name: 'app_order_success')]
     public function index($stripeSessionId, Cart $cart): Response
     {
+      //récupère le stripesessionid en cas de 'success_url'
+    $order =  $this->entityManager->getRepository(Order::class)->findOneByStripeSessionId($stripeSessionId);
 
-
-        $order =  $this->entityManager->getRepository(Order::class)->findOneByStripeSessionId($stripeSessionId);
-
-        
-
+    //si pas de $order ou si l'utilisateur associé à $order est différent de l'utilisateur connecté
         if(!$order || $order->getUser() != $this->getUser()){
+            //redirige vers page d'accueil
             return $this->redirectToRoute('/');
         }
 
+        // si statut à 0
         if(!$order->getStatus()){
-           $cart->removeAll();
-            
+        // passage du statut de la commande à true
         $order->setStatus(true);
+        //vidage du panier
+        $cart->removeAll();
+        //enregistre en BDD
         $this->entityManager->flush();
-
         
+        //création d'un nouveau mail
         $mail = new Mail();
         
+
         $mail->send($order->getUser()->getEmail(),$order->getUser()->getFirstname(),subject:'Merci pour votre commande',
         content:"Bonjour ".$order->getUser()->getFirstname()."<br/>Votre commande a bien été validée");
 
         }
-
-        return $this->render('order_success/orderSuccess.html.twig', [
+        return $this->render('order_success/order_success.html.twig', [
             'order' => $order,
         ]);
     }

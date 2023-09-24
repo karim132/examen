@@ -145,14 +145,7 @@ class Order
         return $this;
     }
 
-    public function getTotal()
-    {
-         $total = null;
-        foreach($this->getOrderDetails()->getValues() as $product){
-            $total= $total + ($product->getPrice()) * $product->getQuantity();
-        }
-        return $total;
-    }
+
 
     public function getReference(): ?string
     {
@@ -188,6 +181,20 @@ class Order
         $this->status = $status;
 
         return $this;
+    }
+
+
+     // function qui permet de récupérer le total de ma commande pour la propriété MoneyField de OrderCrudController
+    public function getTotal()
+    {
+        //initialisation de la variable $total
+         $total = null;
+        //récupération et itération des produits de la commande 
+        foreach($this->getOrderDetails()->getValues() as $product){
+            // calcul du prix * la quantité
+            $total= $total + ($product->getPrice()) * $product->getQuantity();
+        }
+        return $total;
     }
 
 }

@@ -5,13 +5,13 @@
 {% block body %}
 
 {% include "partials/_navbar.html.twig" %}
-
+<main style="width:90% ; margin-left:5%">
 <h2 class="text-center mt-3">Mon récapitulatif</h2>
 
 <hr>
 
 <div class="row">
-<div class="col-md-7">
+<div class="col-md-6">
 <div class="form-check-2">
 <div class="text-center">
 <b>Ma commande</b><br>
@@ -37,6 +37,7 @@
 <div class="col-md-12 text-center">
 <div class="payer">
 <div class="form-signin w-100 m-auto">
+  {# redirige vers la page stripe par la variable $order->getReference() donnée à ma vue twig #}
   <form method='POST' action={{path('app_stripe', {reference:reference})}}> 
    <button class="btn btn-success btn-block w-100" type="submit">
     Payer {{ (total /100 +  carrier.price /100)|number_format(2,',','.') }} €</button> 
@@ -49,7 +50,6 @@
 </div>
 <div class="col-md-5">
 <div class="form-form">
-
  <b>Mon adresse de livraison</b><br>
  {{ delivery|raw}}
 <br/>
@@ -63,7 +63,7 @@
 </div>
 </div>
 </div>
-
+</main>
 {% include "partials/_footer.html.twig" %}
 
 {% endblock %}

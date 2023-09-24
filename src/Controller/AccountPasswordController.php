@@ -8,47 +8,48 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountPasswordController extends AbstractController
 {
     #[Route('/compte/password-modify', name: 'app_account_password')]
-    public function index(Request $request,UserPasswordHasherInterface $userPasswordHasher,UserAuthenticatorInterface $userAuthenticator,EntityManagerInterface $entityManager): Response
+    public function index(Request $request,
+    UserPasswordHasherInterface $userPasswordHasher,
+    EntityManagerInterface $entityManager
+    ): Response
 
-    {
-        $notification= null;
-
+    {    
+        // récupère les data de l'utilistaeur en cours dont le mdp   
         $user= $this->getUser();
+        // création d'un nouveau formulaire
         $form = $this->createForm(ChangePasswordType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $old = $form->get('old_password')->getData();
 
-            // dd($old);
-
-            // if ($userAuthenticator->$passwordisValid($user,$old)){
+                //Recupération du nouveau mdp dans la variable $new
                 $new= $form->get('new_password')->getData();
-                // dd($user);
-
+             
+                // hache le mot de passe 
              $password= $userPasswordHasher->hashPassword($user,$new);
-                // dd($user);
-                    
-            
+          
+             //set le mdp 
             $user->setPassword($password);
-        
-            //   dd($user)
-            ;
 
+            // fige les données récupérées dans l'objet $user
             $entityManager->persist($user);
+            //enregistre en base de données
             $entityManager->flush();
-            $notification='Votre mot de passe a bien été mis à jour';
+          
+            $this->addFlash(
+                'success',
+                'Votre mot de passe a bien été mis à jour!'
+           );
         }
         //  }
         return $this->render('account/password.html.twig', [
             'form' => $form->createView(),
-            'notification'=>$notification
+            // 'notification'=>$notification
         ]);
     }
 }

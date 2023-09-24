@@ -19,7 +19,7 @@ body{
   
 }
 
-.footer p,.footer a,.header nav a{
+.footer p,.footer a,.header nav a,.header nav p{
     background-color: #3157d6;
     color : white;
 }

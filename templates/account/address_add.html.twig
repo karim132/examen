@@ -11,12 +11,32 @@
 
 <main class="form-signin w-50 m-auto">
 
-{{ form(form) }}
+{# {{ form(form) }} #}
+
+    {{ form_start(form)  }}
+    
+        {{ form_row(form.name) }}
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.company) }}
+        {{ form_row(form.adress) }}
+        {{ form_row(form.postal) }}
+       
+        {{ form_row(form.city) }}
+        {{ form_row(form.country) }}
+        {{ form_row(form.phone) }}
+
+
+
+    {# <button type="submit" class="w-100 btn btn-primary btn-lg mt-2">M'inscrire</button> #}
+
+       
+    {{ form_end(form) }}
 
 <hr>
 
 
-<a class="btn btn-primary btn-lg w-100 mt-2" href={{path('app_account')}}>Retour à mon compte<a><br>
+<a class="btn btn-warning btn-lg w-100 mt-2" href={{path('app_account')}}>Retour à mon compte<a><br>
 </main>
 
 

@@ -20,19 +20,19 @@ class OrderFailureController extends AbstractController
     #[Route('/commande/echec/{stripeSessionId}', name: 'app_order_failure')]
     public function index($stripeSessionId): Response
     {
-
+          //récupère le stripesessionid en cas de 'cancel_url'
           $order =  $this->entityManager->getRepository(Order::class)->findOneByStripeSessionId($stripeSessionId);
 
-        //  dd($order);
-
+          //si pas de $order ou si l'utilisateur associé à $order est différent de l'utilisateur connecté
         if(!$order || $order->getUser() != $this->getUser()){
+           //redirige vers page d'accueil
             return $this->redirectToRoute('/');
         }
-
-
-
-        return $this->render('order_failure/orderFailure.html.twig', [
+        return $this->render('order_failure/order_failure.html.twig', [
             'order' => $order,
         ]);
+
+
+
     }
 }

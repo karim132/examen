@@ -7,10 +7,10 @@ use App\Entity\Category;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\User;
-use App\Entity\Contact;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,17 +20,16 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
 
-        return $this->render('admin/admin.html.twig');
+        // return $this->render('admin/admin.html.twig');
 
         // $routeBuilder = $this->container->get(CrudUrlGenerator::class)->build();
         // return $this->redirect($routeBuilder->setController(OrderCrudController::class)->generateUrl());
 
-        // Option 1. You can make your dashboard redirect to some common page of your backend
+        // Option 1. Vous pouvez rediriger votre tableau de bord vers une page commune de votre backend
         //
 
-
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
+        return $this->redirect($adminUrlGenerator->setController(OrderCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //

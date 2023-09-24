@@ -9,6 +9,15 @@
  <main class="form-signin w-50 m-auto">
 
 <h1 class="mt-3 text-center">Inscription</h1>
+{% for message in app.flashes('success') %}
+    <div 
+      style="color: green;
+        border: 2px green solid;
+        text-align: center;
+        padding: 5px;margin-bottom: 10px;margin-top: 10px;">
+        {{ message }}
+    </div>
+{% endfor %}
 
 {{ form(form) }} 
 

@@ -55,25 +55,25 @@ public function findWithSearch(Search $search)
 
 
 
-   /**
-    * @param int $page
-    * @return PaginationInterface
-    */
-   public function findAllWithData(int $page): PaginationInterface
-   {
-       $data=  $this->createQueryBuilder('p')
-        //    ->andWhere('p.exampleField = :val')
-        //    ->setParameter('val', $value)
-           ->orderBy('p.id', 'ASC')
-        //    ->setMaxResults(10)
-           ->getQuery()
-           ->getResult()
-       ;
+//    /**
+//     * @param int $page
+//     * @return PaginationInterface
+//     */
+//    public function findAllWithData(int $page): PaginationInterface
+//    {
+//        $data=  $this->createQueryBuilder('p')
+//         //    ->andWhere('p.exampleField = :val')
+//         //    ->setParameter('val', $value)
+//            ->orderBy('p.id', 'ASC')
+//         //    ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
 
-       $pagination= $this->paginator->paginate($data, $page,9);
+//        $pagination= $this->paginator->paginate($data, $page,9);
 
-       return $pagination;
-   }
+//        return $pagination;
+//    }
 
 //    public function findOneBySomeField($value): ?Product
 //    {

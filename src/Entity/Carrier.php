@@ -64,6 +64,7 @@ class Carrier
         return $this;
     }
 
+    //renvoie l'objet du formulaire OrderType en string
     public function __toString()
     {
         return $this->getName().'[br]'.$this->getDescription().'[br]'.number_format(($this->getPrice()/100),2,',').' €';

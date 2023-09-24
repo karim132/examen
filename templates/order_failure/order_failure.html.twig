@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Echec de paiement{% endblock %}
+
+{% block body %}
+
+{% include "partials/_navbar.html.twig" %}
+
+{# {{ dump(order) }} #}
+<div class="w-80 mt-3" style="margin-left: 10px; margin-right: 10px;">
+<h2>Echec de paiement</h2>
+<p>Bonjour <strong>{{ order.user.firstname}} {{ order.user.lastname}}</strong> <br/>
+ Votre paiement pour la commande numéro <strong>{{ order.reference }}</strong> a échoué.<br/>
+
+
+<hr>
+<div class="col-md-12" style="width: 55rem;" >
+<p>Nous vous invitons à recommencer.</p>
+<a class=' btn btn-success btn-block  mt-3'href={{ path('app_order')}}>Réessayer le paiement</a>
+</div>
+
+</p>
+</div>
+
+{% endblock %}

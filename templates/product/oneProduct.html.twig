@@ -9,11 +9,11 @@
 
 <main class="one-product">
  <div class="row">
- <div class="col-md-3 mt-5">
- <img src="/uploads/{{ oneProduct.illustration }}" alt="{{ oneProduct.name }}" style="width:400px;height:500px"  class="img-fluid rounded">
+ <div class="col-md-4 mt-5">
+ <img src="/uploads/{{ oneProduct.illustration }}" alt="{{ oneProduct.name }}" style="width:400px;height:500px;"  class="img-fluid rounded">
  </div>
 
- <div class="col-md-9 my-auto">
+ <div class="col-md-8 my-auto">
  <h1>{{ oneProduct.name }}</h1>
  <p>{{ oneProduct.subtitle}}</p>
  <span>{{ (oneProduct.price /100)|number_format(2) }} €</span>
@@ -21,8 +21,7 @@
  <p>{{ oneProduct.description }}</p>
  <hr>
 
- {# <a href={{ path('cart_app_add',{ 'id': oneProduct.id})}} class="btn btn-primary">Ajouter au panier</a> #}
- <a href={{ path('cart_add',{ 'id': oneProduct.id})}} class="btn btn-warning">Ajouter au panier</a>
+ <a href={{ path('cart_ajout',{ 'id': oneProduct.id})}} class="btn btn-warning">Ajouter au panier</a>
  </div>
  </div>
  </main>

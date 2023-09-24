@@ -17,10 +17,7 @@ Une confirmation vient de vous être envoyée par email à l'adresse <strong>{{ 
 Votre commande sera livrée par <strong>{{ order.carrierName }}</strong> à l'adresse suivante : <br/>
 {{ order.delivery|raw }}
 <hr>
-Pour suivre votre commande, rendez-vous dans votre <a class="voir-ma-commande" href={{ path('app_account_order')}}>compte</a>
-
-
-</p>
+<p>Pour suivre votre commande, rendez-vous dans votre <a class="voir-ma-commande" href={{ path('app_account_order')}}>compte</a></p>
 </div>
  {% include "partials/_footer.html.twig" %}
 

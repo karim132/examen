@@ -47,7 +47,7 @@ class AddressType extends AbstractType
             ->add('submit',SubmitType::class,[
                 'label'=>'Ajouter mon adresse',
                 'attr'=>[
-                    'class' => 'btn btn-primary btn-lg mt-3 w-100'
+                    'class' => 'btn btn-success btn-lg mt-3 w-100'
                 ]
             ])
         ;

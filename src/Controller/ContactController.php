@@ -68,6 +68,10 @@ class ContactController extends AbstractController
     $response->success();
 
             }
+            $this->addFlash(
+                'success',
+                'Nous avons bien reçu votre message.Nous vous contacterons bientôt!'
+          );
         }
        
         return $this->render('contact/index.html.twig', [

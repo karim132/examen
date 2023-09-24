@@ -17,40 +17,29 @@ class ProductController extends AbstractController
 {
     #[Route('/produits', name: 'app_product')]
     public function index(
-        ProductRepository $productsRepository,
         Request $request,EntityManagerInterface $entityManager,
         PaginatorInterface $paginator
     ): Response
     {
-        //  $pagination= $productsRepository->findAllWithData($request->query->getInt('page',1));
-
-
-         
-        
+        //Création d'une nouvelle recherche
         $search =new Search;
+        //création d'un nouveau formulaire
         $form= $this->createForm(SearchType::class, $search);
 
         $form->handleRequest($request);
-        
-        //  $products= $productsRepository->findAll();
+      
+        // Requête pour obtenir les produits
         $query = $entityManager->getRepository(Product::class)->findWithSearch($search);
+
+        //Pagination des résultats
         $pagination= $paginator->paginate(
-            $query,
-            $request->query->getInt('page',1),
-            9
+            $query, // requête à paginer
+            $request->query->getInt('page',1), //Numéro de page par défaut
+            9 // Nombre déléments par page
         );
-
-        // if ($form->isSubmitted() && $form->isValid()){
-
-        // }
-
-        // $pagination= $productsRepository->findAllWithData($request->query->getInt('page',1));
-
         return $this->render('product/index.html.twig', [
-            // 'pagination'=> $productsRepository->findAllWithData($request->query->getInt('page',1)),
             'products' => $pagination,
-            'form' => $form->createView()
-            //  dd($products)
+            'form' => $form->createView()        
         ]);
    
     }
@@ -67,7 +56,6 @@ class ProductController extends AbstractController
             // Récupère le produit demandé par son id
             'oneProduct' => $oneProductRepository->findOneBy(
                 ['id' => $id],
-                    // dd($oneProduct)
             ),
           ]);
 }

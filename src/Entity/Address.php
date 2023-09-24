@@ -169,6 +169,7 @@ class Address
         return $this;
     }
 
+    //renvoie l'objet du formulaire OrderType en string
     public function __toString()
     {
         return $this->getName().'[br]'.$this->getAdress().'[br]'.$this->getCity().'-'.$this->getCountry();
