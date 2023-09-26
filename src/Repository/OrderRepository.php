@@ -25,7 +25,7 @@ class OrderRepository extends ServiceEntityRepository
 
     /**
      * findSuccessOrders()
-     * Permet d'afficher les commandes dans l'espace membre de l'utilisateur
+     * Afficher les commandes dans la page mes commandes
      */
 
      public function findSuccessOrders($user)

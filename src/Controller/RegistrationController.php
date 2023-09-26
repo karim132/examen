@@ -62,6 +62,8 @@ class RegistrationController extends AbstractController
                // $content ="Bienvenue ".$user->getFirstname()."<br/>Vous pouvez dès à présent visiter notre site";
                $mail->send($user->getEmail(),$user->getFirstname(),subject:'Bienvenue sur notre site',
                content:"Bienvenue ".$user->getFirstname()."<br/>Vous pouvez dès à présent visiter notre site");
+
+
                 // si formulaire valide, authentification de l'utilisateur
                 return $userAuthenticator->authenticateUser(
                     $user,

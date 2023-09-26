@@ -26,8 +26,6 @@ class DashboardController extends AbstractDashboardController
         // return $this->redirect($routeBuilder->setController(OrderCrudController::class)->generateUrl());
 
         // Option 1. Vous pouvez rediriger votre tableau de bord vers une page commune de votre backend
-        //
-
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         return $this->redirect($adminUrlGenerator->setController(OrderCrudController::class)->generateUrl());
 

@@ -42,10 +42,10 @@ class OrderSuccessController extends AbstractController
         
         //création d'un nouveau mail
         $mail = new Mail();
-        
 
         $mail->send($order->getUser()->getEmail(),$order->getUser()->getFirstname(),subject:'Merci pour votre commande',
-        content:"Bonjour ".$order->getUser()->getFirstname()."<br/>Votre commande a bien été validée");
+        content:"Bonjour ".$order->getUser()->getFirstname().
+        "<br/> Nous vous remercions pour votre commande numero <strong>".$order->getReference()."</strong>");
 
         }
         return $this->render('order_success/order_success.html.twig', [
